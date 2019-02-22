@@ -1,6 +1,9 @@
 #include "person.h"
+#include <iomanip>
+Person::Person()
+{
 
-
+}
 string Person::getFirstName()
 {
     return firstName;
@@ -11,6 +14,7 @@ string Person::getLastName()
 }
 float Person::getPayRate()
 {
+
     return payRate;
 }
 float Person:: getHoursWorked()
@@ -42,7 +46,7 @@ string Person:: fullName()
 }
 float Person:: totalPay()
 {
+
     float total=payRate*hoursWorked;
     return total;
 }
-

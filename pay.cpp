@@ -1,48 +1,42 @@
 #include "person.cpp"
 #include <iostream>
 #include <fstream>
+#include <vector>
 
-void writeData(Person output[],int size);
-void readData(Person input[],int &size);
+void writeData(vector<Person> output);
+void readData(vector<Person> &input);
 int main()
 {
-  int size;
-    Person employee[20];
-    readData(employee,size);
-    writeData(employee,size);
-    return 0;
+  vector <Person> employee;
+  readData(employee);
+  writeData(employee);
+  return 0;
 }
 
-void readData(Person input[],int &size)
+void readData(vector<Person> &input)
 {
-  int temp=0;
   string first,last;
   float hours, rate;
-    ifstream file;
+  ifstream file;
    file.open("input.txt");
-   for (int i =0; i<20;i++)
+    while(true)
    {
      file>>last>>first>>rate>>hours;
      if(file.peek(),file.eof())
     {break;}
-     input[i].setFirstName(first);
-     input[i].setLastName(last);
-     input[i].setPayRate(rate);
-     input[i].setHoursWorked(hours);
-     temp++;
-
+     input.emplace_back(first,last,rate,hours);
    }
    file.close();
-   size=temp;
 }
 
-void writeData(Person output[], int size)
+void writeData(vector<Person> output)
 {
   fstream file;
   file.open("output.txt",fstream::out);
-  for (int i=0;i<size;i++)
+  for (int i=0;i<output.size();i++)
   {
     file<<output[i].fullName()<<" "<<output[i].totalPay()<<endl;
   }
   file.close();
 }
+
